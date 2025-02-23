@@ -105,7 +105,7 @@ void CPPDumpWriter::dumpExportsImpl(const PEFile& peFile, const Demangler& deman
 		const uint16_t ordinal;
 	};
 
-	static inline constexpr ExportData g_exports[]{)");
+	inline constexpr ExportData g_exports[]{)");
 
 	for (auto&& entry : peFile)
 	{
@@ -114,7 +114,7 @@ void CPPDumpWriter::dumpExportsImpl(const PEFile& peFile, const Demangler& deman
 
 	writeln(R"(};
 	
-	static inline constexpr const size_t g_count = sizeof(g_exports) / sizeof(ExportData);
+	inline constexpr const size_t g_count = sizeof(g_exports) / sizeof(ExportData);
 
 	template<typename Predicate>
 	static inline constexpr const ExportData* find(Predicate p)
@@ -122,10 +122,10 @@ void CPPDumpWriter::dumpExportsImpl(const PEFile& peFile, const Demangler& deman
 		return std::find_if(g_exports, g_exports + g_count, p);
 	}
 
-	static inline constexpr const ExportData* findName(std::string_view name) { return find([name](const auto& e) {return e.name == name; }); }
-	static inline constexpr const ExportData* findDemangledName(std::string_view demangled) { return find([demangled](const auto& e) {return e.demangledName == demangled; }); }
-	static inline constexpr const ExportData* findAddress(uintptr_t address) { return find([address](const auto& e) {return e.address == address; }); }
-	static inline constexpr const ExportData* findOrdinal(uint16_t ordinal) { return find([ordinal](const auto& e) {return e.ordinal == ordinal; }); }
+	inline constexpr const ExportData* findName(std::string_view name) { return find([name](const auto& e) {return e.name == name; }); }
+	inline constexpr const ExportData* findDemangledName(std::string_view demangled) { return find([demangled](const auto& e) {return e.demangledName == demangled; }); }
+	inline constexpr const ExportData* findAddress(uintptr_t address) { return find([address](const auto& e) {return e.address == address; }); }
+	inline constexpr const ExportData* findOrdinal(uint16_t ordinal) { return find([ordinal](const auto& e) {return e.ordinal == ordinal; }); }
 })");
 }
 
