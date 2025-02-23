@@ -53,7 +53,7 @@ PEFile::PEFile(const std::filesystem::path& path) :
 	}
 	else
 	{
-		auto ntHeader = ntHeaders32();
+		auto ntHeader = ntHeaders64();
 		numSections = ntHeader->FileHeader.NumberOfSections;
 		sectionsOffset = m_dosHeader.e_lfanew + offsetof(IMAGE_NT_HEADERS64, OptionalHeader) + ntHeader->FileHeader.SizeOfOptionalHeader; //Equivalent to IMAGE_FIRST_SECTION
 	}
