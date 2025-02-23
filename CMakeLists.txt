@@ -25,7 +25,7 @@ if (MSVC)
 	endif()
 endif()
 
-project(exportdump VERSION 1.1.0 LANGUAGES CXX)
+project(exportdump VERSION 1.2.0 LANGUAGES CXX)
 file(GLOB SRC_FILES CONFIGURE_DEPENDS  ${PROJECT_SOURCE_DIR}/src/*.cpp  ${PROJECT_SOURCE_DIR}/src/*.hpp) #Yes, GLOB is bad. No, I do not care.
 
 add_executable(${PROJECT_NAME} ${SRC_FILES})
