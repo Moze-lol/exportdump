@@ -117,7 +117,7 @@ void CPPDumpWriter::dumpExportsImpl(const PEFile& peFile, const Demangler& deman
 	inline constexpr const size_t g_count = sizeof(g_exports) / sizeof(ExportData);
 
 	template<typename Predicate>
-	inline constexpr const ExportData* find(Predicate p)
+	static inline constexpr const ExportData* find(Predicate p)
 	{
 		return std::find_if(g_exports, g_exports + g_count, p);
 	}
