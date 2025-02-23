@@ -23,6 +23,31 @@ You can read more about the PE file format [here](https://learn.microsoft.com/en
 	+ `--cpp`: Dump as C++ header. This is the default dump format
 	+ `--json`: Dump as JSON file
 
+\
+The C++ generated header contains `namespace export::<filaname>`, that in turn contains:
++ Definition of the `ExportData` structure:
+```cpp
+struct ExportData
+{
+	const std::string_view name;
+	const std::string_view demangledName;
+	const uintptr_t address;
+	const uint16_t ordinal;
+};
+```
++ A compile time array with all the exports:
+```cpp
+constexpr const size_t g_count;
+constexpr const ExportData g_exports[g_count];
+```
++ Compile time lookup functions, allowing to get the whole EAT entry info from just one data point: 
+```cpp
+constexpr const ExportData* findName(std::string_view name);
+constexpr const ExportData* findDemangledName(std::string_view demangled);
+constexpr const ExportData* findAddress(uintptr_t address);
+constexpr const ExportData* findName(uint16_t ordinal);
+```
+
 ## Example
 
 `exportdump.exe "C:\Windows\System32\kernel32.dll" "kernel32.exports.hpp" --cpp`
